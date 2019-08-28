@@ -21,20 +21,20 @@ virtualService:
   path: /demoreact360
   rewrite: /
   hosts:
-    - domain: play.test.shopee.co.id
+    - domain: coba.test.shopee.co.id
       enabled: true
-    - domain: play.test.shopee.co.th
-      enabled: true
-    - domain: play.test.shopee.com.my
-      enabled: true
-    - domain: play.test.shopee.sg
-      enabled: true
-    - domain: play.test.shopee.vn
-      enabled: true
-    - domain: play.test.shopee.tw
-      enabled: true
-    - domain: play.test.shopee.ph
-      enabled: true
+    - domain: coba.test.shopee.co.th
+      enabled: false
+    - domain: coba.test.shopee.com.my
+      enabled: false
+    - domain: coba.test.shopee.sg
+      enabled: false
+    - domain: coba.test.shopee.vn
+      enabled: false
+    - domain: coba.test.shopee.tw
+      enabled: false
+    - domain: coba.test.shopee.ph
+      enabled: false
 
 ingress:
   enabled: false
