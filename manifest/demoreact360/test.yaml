@@ -1,12 +1,12 @@
 # application name
-appName: demoreact360
+appName: React360
 
 # pods replica
 replicaCount: 1
 
 # image can be overwritten by deploy.sh
 image:
-  repository: asia.gcr.io/spid-non-prod/demoreact360
+  repository: asia.gcr.io/spid-non-prod/React360
   tag: latest
   pullPolicy: IfNotPresent
 
@@ -18,7 +18,7 @@ service:
 # networking configuration virtual service or ingress resource
 virtualService:
   enabled: true
-  path: /demoreact360
+  path: /tourism360
   rewrite: /
   hosts:
     - domain: coba.test.shopee.co.id
