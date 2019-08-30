@@ -91,7 +91,7 @@ export class InfoPanel extends React.Component {
 };
 
 
-export default class TourismVR extends React.Component {
+export class TourismVR extends React.Component {
   render() {
     return (
       <View>
