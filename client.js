@@ -1,40 +1,59 @@
-// This file contains the boilerplate to execute your React app.
-// If you want to modify your application's content, start in "index.js"
+import { ReactInstance, Module, Surface } from 'react-360-web';
 
-import { initTourism } from './components/surfaceModules/SurfaceTourism' 
-import { initShopeeOffice } from './components/surfaceModules/kantorTourism';
+let r360, infoRoot, infoPanel, marketPanel, museumPanel;
+export function initShopeeOffice(bundle, parent, options = {}) {
+    r360 = new ReactInstance(bundle, parent, {
+      // Add custom options here
+      fullScreen: true,
+      nativeModules: [
+        new ShopeeOffice(),
+      ],
+      ...options,
+    });
+  
+   
+  marketPanel = new Surface(
+    100,
+    100,
+    Surface.SurfaceShape.Flat
+  )
 
+  marketPanel.setAngle(
+    0.4, /* yaw angle */
+    0 /* pitch angle */
+  );
 
-function run (){
-  if(window.location.search.indexOf('office') >= 0){
-    window.React360 = {init: initShopeeOffice};
-    window.React360.init(
-      'index.bundle?platform=vr&dev=true',
-      document.getElementById('container'),
-      {
-        assetRoot: 'static_assets/',
-      })
-      setTimeout(() => {
-        Array.from(document.getElementsByTagName('canvas'))
-        .forEach(canvas => {
-          const width = canvas.style.width.replace('px','');
-          const height = canvas.style.height.replace('px','');
-          canvas.style = `width: ${Number(width)*1.5}; height: ${Number(height)*1.5};`
-          console.log(canvas)
+  
+  infoRoot = r360.renderToSurface(
+    r360.createRoot('InfoPanelOffice', { to: 'office2' }),
+    marketPanel
+  );
 
-        })
-      },1000)
     
-  } else {
-    window.React360 = {init: initTourism};
- window.React360.init(
-    'index.bundle?platform=vr&dev=true',
-    document.getElementById('container'),
-    {
-      assetRoot: 'static_assets/',
-    })
-  }
- 
+  
+  // Load the initial environment
+  r360.compositor.setBackground('/static_assets/office1.jpg');
+  
 }
 
-run();
+  
+export class ShopeeOffice extends Module {
+    constructor() {
+      super('ShopeeOffice');
+    }
+
+    renderOffice2(){
+      marketPanel.setAngle(1.5,0)
+      r360.compositor.setBackground('/static_assets/office2.jpg');
+    }
+
+    renderOffice1(){
+      marketPanel.setAngle(
+        0.4, /* yaw angle */
+        0 /* pitch angle */
+      );
+      r360.compositor.setBackground('/static_assets/office1.jpg');
+    }
+  }
+  
+window.React360 = { init: initShopeeOffice }
